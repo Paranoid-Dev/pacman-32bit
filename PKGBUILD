@@ -12,7 +12,7 @@ for ((i=0; i<${#sha256sums[@]}; i++)); do
   fi
 done
 
-if [ ! "${CARCH}" = "i686" ]; then
+
   # patch architecture where needed
   eval "$(
     declare -f package | \
@@ -21,7 +21,7 @@ if [ ! "${CARCH}" = "i686" ]; then
           sed -i "s@i686@'"${CARCH}"'@g; /^CHOST/ s/pentium4-/i686-/" "$pkgdir/etc/makepkg.conf"
       '
   )"
-fi
+
 
 source+=('replace-i686-by-pentium4-when-architecture-is-auto.patch')
 sha256sums+=('e8d5f8979c4dfab49e7ac058846f2454b865c1da451e086c23e61034fd820c19')
